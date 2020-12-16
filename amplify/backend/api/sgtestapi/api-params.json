@@ -7,13 +7,24 @@
                 "open": true
             },
             "policyResourceName": "/git"
+        },
+        {
+            "name": "/site",
+            "lambdaFunction": "site",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/site"
         }
     ],
-    "resourceName": "git",
-    "apiName": "git",
+    "resourceName": "sgtestapi",
+    "apiName": "sgtestapi",
     "functionArns": [
         {
             "lambdaFunction": "git"
+        },
+        {
+            "lambdaFunction": "site"
         }
     ],
     "privacy": {
@@ -26,6 +37,14 @@
         {
             "category": "function",
             "resourceName": "git",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        },
+        {
+            "category": "function",
+            "resourceName": "site",
             "attributes": [
                 "Name",
                 "Arn"
