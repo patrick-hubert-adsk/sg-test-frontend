@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/git",
+            "lambdaFunction": "git",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/git"
+        }
+    ],
+    "resourceName": "git",
+    "apiName": "git",
+    "functionArns": [
+        {
+            "lambdaFunction": "git"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-amplify84598429d9bd4-staging-152211-authRole",
+        "unAuthRoleName": "amplify-amplify84598429d9bd4-staging-152211-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "git",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
