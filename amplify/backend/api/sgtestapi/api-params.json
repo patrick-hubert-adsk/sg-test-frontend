@@ -15,6 +15,13 @@
                 "open": true
             },
             "policyResourceName": "/site"
+        },
+        {
+            "name": "/branch",
+            "lambdaFunction": "git",
+            "privacy": {
+                "open": true
+            }
         }
     ],
     "resourceName": "sgtestapi",
@@ -50,5 +57,6 @@
                 "Arn"
             ]
         }
-    ]
+    ],
+    "uuid": "842c7fe3"
 }
