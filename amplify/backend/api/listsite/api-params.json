@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/site",
+            "lambdaFunction": "listsite",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/site"
+        }
+    ],
+    "resourceName": "listsite",
+    "apiName": "listsite",
+    "functionArns": [
+        {
+            "lambdaFunction": "listsite"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-amplify84598429d9bd4-staging-152211-authRole",
+        "unAuthRoleName": "amplify-amplify84598429d9bd4-staging-152211-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "listsite",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
