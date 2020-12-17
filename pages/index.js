@@ -1,27 +1,28 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
-import Amplify, { API } from 'aws-amplify';
-import awsconfig from '../src/aws-exports';
+// import Amplify, { API } from 'aws-amplify';
+// import awsconfig from '../src/aws-exports';
 
-Amplify.configure(awsconfig);
+// Amplify.configure(awsconfig);
 
-function getGitData() {
-  const apiName = 'sgtestapi';
-  const path = '/git';
-  const myInit = { // OPTIONAL
-    headers: {}, // OPTIONAL
-  };
+// function getGitData() {
+//   const apiName = 'sgtestapi';
+//   const path = '/git';
+//   const myInit = { // OPTIONAL
+//     headers: {}, // OPTIONAL
+//   };
 
-  return API.get(apiName, path, myInit);
-}
+//   return API.get(apiName, path, myInit);
+// }
 
 
-export async function getServerSideProps() {
-  const gitData = await getGitData()
-  return { props: { gitData } }
-}
+// export async function getServerSideProps() {
+//   const gitData = await getGitData()
+//   return { props: { gitData } }
+// }
 
+// export default function Home({gitData}) {
 export default function Home({gitData}) {
   return (
     <div className={styles.container}>
@@ -32,7 +33,8 @@ export default function Home({gitData}) {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">{gitData.Patrick}</a>
+        {/* Welcome to <a href="https://nextjs.org">{gitData.Patrick}</a> */}
+        Welcome to <a href="https://nextjs.org">PATATE</a>
         </h1>
 
         <p className={styles.description}>
