@@ -50,14 +50,14 @@ export default function Home({gitData, siteData}) {
         {/* Welcome to <a href="https://nextjs.org">{gitData.Patrick}</a> */}
         SHOTGUN Cloud Test Stack
         </h1>
-        {ButtonBases()}
+        {/* {ButtonBases()} */}
         {/* <p className={styles.description}>
           Get started by editing{' '}
           <code className={styles.code}>pages/index.js</code>
         </p> */}
 
         <p></p>
-        {/* {BasicTable(siteData)} */}
+        {BasicTable(siteData)}
 
       </main>
     </div>
