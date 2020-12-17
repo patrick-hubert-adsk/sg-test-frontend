@@ -149,12 +149,11 @@ def delete_stack(stack_name):
         stack_name (string): Stack name in CloudFormation. StackID also works
 
     """
-    command = [
-        "aws", "cloudformation", "delete-stack",
-        "--stack-name", stack_name,
-    ]
-    subprocess.check_call(command)
+    client = boto3.client('cloudformation')
 
+    client.delete_stack(
+        StackName=stack_name
+    )
 
 def describe_service(service_name):
     """

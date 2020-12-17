@@ -20,6 +20,8 @@ def handler(event, context):
             body = get_test_sites()
         elif event["httpMethod"] == "POST":
             body = create_test_site(event)
+        elif event["httpMethod"] == "DELETE":
+            body = delete_test_site(event)
         else:
             status_code = 404
             body = {}
@@ -61,6 +63,14 @@ def get_test_sites():
             NextToken=response['NextToken']
         )
     return all_test_sites
+
+def delete_test_site(event):
+    print('delete_test_site')
+    site_name = event['path'].split('/')[-1]
+    stack_name = 'precit-app-{}'.format(site_name)
+    print(stack_name)
+    aws_utility.delete_stack(stack_name)
+    return {}
 
 def create_test_site(event):
     body = json.loads(event['body'])
@@ -129,10 +139,12 @@ def execute_create_test_site(app_tag, s3_backup_db_path, site_name, site_id):
 
 if __name__ == "__main__":
     print("main")
-    body = {
-        "app_tag": "master",
-        "site_name": "test3"
-    }
+    # body = {
+    #     "app_tag": "master",
+    #     "site_name": "test3"
+    # }
 
-    payload = handler({"httpMethod": "POST", "body": json.dumps(body)}, {})
+    # payload = handler({"httpMethod": "POST", "body": json.dumps(body)}, {})
+
+    payload = handler({"httpMethod": "DELETE", "path": "/site/testcloud2"}, {})
     pp(payload)
