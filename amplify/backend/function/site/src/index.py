@@ -56,6 +56,8 @@ def get_test_sites():
             if stack['StackName'].startswith('precit-app'):
                 # Converting datetime object to string
                 stack['CreationTime'] = str(stack['CreationTime'])
+                if stack.get('LastUpdatedTime'):
+                    stack['LastUpdatedTime'] = str(stack['LastUpdatedTime'])
                 all_test_sites.append(stack)
         if not response.get('NextToken'):
             break
