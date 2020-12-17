@@ -1,4 +1,13 @@
 version: 1
+backend:
+  phases:
+    build:
+      commands:
+        - amazon-linux-extras install python3.8
+        - ln -fs /usr/bin/python3.8 /usr/bin/python3
+        - pip3.8 install pipenv
+        - npm install -g @aws-amplify/cli
+        - amplifyPush --simple
 frontend:
   phases:
     preBuild:
@@ -14,11 +23,3 @@ frontend:
   cache:
     paths:
       - node_modules/**/*
-backend:
-  phases:
-    build:
-      commands:
-        - amazon-linux-extras install python3.8
-        - ln -fs /usr/bin/python3.8 /usr/bin/python3
-        - pip3.8 install pipenv
-        - amplifyPush --simple
