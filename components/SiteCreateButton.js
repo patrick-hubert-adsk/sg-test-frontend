@@ -9,7 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 
 import Amplify, { API } from 'aws-amplify';
-import awsconfig from '../../src/aws-exports';
+import awsconfig from '../src/aws-exports';
 
 
 Amplify.configure(awsconfig);
