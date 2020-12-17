@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
-
 import Amplify, { API } from 'aws-amplify';
 import awsconfig from '../src/aws-exports';
 
@@ -24,6 +23,7 @@ export async function getServerSideProps() {
 }
 
 import Navbar from "./components/Navbar"
+import TestStackTable from "./components/TestStackTable"
 
 export default function Home({siteData}) {
   return (
@@ -38,7 +38,7 @@ export default function Home({siteData}) {
         <h1 className={styles.title}>
         SHOTGUN Cloud Test Stack
         </h1>
-        {/* {BasicTable(siteData)} */}
+        {TestStackTable(siteData)}
       </main>
     </div>
   )
