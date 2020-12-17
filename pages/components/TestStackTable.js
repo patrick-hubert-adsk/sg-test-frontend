@@ -10,6 +10,8 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
 import SiteLaunchButton from './SiteLaunchButton';
+import SiteUpdateButton from './SiteUpdateButton';
+import SiteDeleteButton from './SiteDeleteButton';
 
 const useStyles = makeStyles({
   table: {
@@ -43,8 +45,8 @@ export default function TestStackTable(rows) {
               <TableCell align="left">Unknown</TableCell>
               <TableCell align="left">{row.CreationTime.slice(0, 19)}</TableCell>
               <TableCell align="left">
-                <Button variant="contained">Update</Button>
-                <Button variant="contained">Delete</Button>
+                <SiteUpdateButton />
+                <SiteDeleteButton />
               </TableCell>
             </TableRow>
           ))}
