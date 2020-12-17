@@ -24,6 +24,7 @@ export async function getServerSideProps() {
 
 import Navbar from "./components/Navbar"
 import TestStackTable from "./components/TestStackTable"
+import SiteCreateButton from "./components/SiteCreateButton"
 
 export default function Home({siteData}) {
   return (
@@ -38,6 +39,7 @@ export default function Home({siteData}) {
         <h1 className={styles.title}>
         SHOTGUN Cloud Test Stack
         </h1>
+        <p><SiteCreateButton /></p>
         {TestStackTable(siteData)}
       </main>
     </div>
