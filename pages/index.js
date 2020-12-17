@@ -1,29 +1,42 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
-// import Amplify, { API } from 'aws-amplify';
-// import awsconfig from '../src/aws-exports';
+import Amplify, { API } from 'aws-amplify';
+import awsconfig from '../src/aws-exports';
 
-// Amplify.configure(awsconfig);
+import ButtonBases from '../components/Button/index.jsx'
 
-// function getGitData() {
-//   const apiName = 'sgtestapi';
-//   const path = '/git';
-//   const myInit = { // OPTIONAL
-//     headers: {}, // OPTIONAL
-//   };
+Amplify.configure(awsconfig);
 
-//   return API.get(apiName, path, myInit);
-// }
+function getGitData() {
+  const apiName = 'sgtestapi';
+  const path = '/git';
+  const myInit = { // OPTIONAL
+    headers: {}, // OPTIONAL
+  };
+
+  return API.get(apiName, path, myInit);
+}
+
+function getSiteData() {
+  const apiName = 'sgtestapi';
+  const path = '/site';
+  const myInit = { // OPTIONAL
+    headers: {}, // OPTIONAL
+  };
+
+  return API.get(apiName, path, myInit);
+}
 
 
-// export async function getServerSideProps() {
-//   const gitData = await getGitData()
-//   return { props: { gitData } }
-// }
+export async function getServerSideProps() {
+  const gitData = await getGitData()
+  const siteData = await getSiteData()
+  return { props: { gitData, siteData } }
+}
 
 // export default function Home({gitData}) {
-export default function Home({gitData}) {
+export default function Home({gitData, siteData}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -35,45 +48,17 @@ export default function Home({gitData}) {
         <h1 className={styles.title}>
         {/* Welcome to <a href="https://nextjs.org">{gitData.Patrick}</a> */}
         {/* Welcome to <a href="https://nextjs.org">{gitData.Patrick}</a> */}
-        Welcome to <a href="https://nextjs.org">PATATE WITH TABLE</a>
+        SHOTGUN Cloud Test Stack
         </h1>
-
-        <p className={styles.description}>
+        {ButtonBases()}
+        {/* <p className={styles.description}>
           Get started by editing{' '}
           <code className={styles.code}>pages/index.js</code>
-        </p>
+        </p> */}
 
-        {BasicTable()}
+        <p></p>
+        {/* {BasicTable(siteData)} */}
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
       </main>
     </div>
   )
@@ -91,6 +76,18 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+import Button from '@material-ui/core/Button';
+import { green } from '@material-ui/core/colors';
+
+function getLaunchButton(data) {
+  if (data.Outputs) {
+    const siteUrl = `https://${data.Outputs[0].OutputValue}`;
+    return (
+      <Button target='_blank' href={siteUrl} variant="contained">Launch</Button>
+    );
+  }
+}
+
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -101,7 +98,7 @@ function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
 
-const rows = [
+const rows_OLD = [
   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
   createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
   createData('Eclair', 262, 16.0, 24, 6.0),
@@ -109,7 +106,7 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-function BasicTable() {
+function BasicTable(rows) {
   const classes = useStyles();
 
   return (
@@ -117,23 +114,27 @@ function BasicTable() {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+          <TableCell></TableCell>
+          <TableCell>Branch</TableCell>
+            <TableCell align="left">Creator</TableCell>
+            <TableCell align="left">Created</TableCell>
+            <TableCell align="left">Actions</TableCell>
+            <TableCell align="left"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.name}>
+            <TableRow key={row.StackName}>
               <TableCell component="th" scope="row">
-                {row.name}
+                {getLaunchButton(row)}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="left">{row.StackName}</TableCell>
+              <TableCell align="left">Unknown</TableCell>
+              <TableCell align="left">{row.CreationTime.slice(0, 19)}</TableCell>
+              <TableCell align="left">
+                <Button variant="contained">Update</Button>
+                <Button variant="contained">Delete</Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
