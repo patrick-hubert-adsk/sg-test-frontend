@@ -2,6 +2,8 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
 import Amplify, { withSSRContext } from 'aws-amplify';
+import awsconfig from '../src/aws-exports';
+Amplify.configure(awsconfig);
 
 import Navbar from "../components/Navbar"
 import TestStackTable from "../components/TestStackTable"
