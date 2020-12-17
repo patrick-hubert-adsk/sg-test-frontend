@@ -1,30 +1,11 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
-import Amplify, { API } from 'aws-amplify';
-import awsconfig from '../src/aws-exports';
+import Amplify, { withSSRContext } from 'aws-amplify';
 
-Amplify.configure(awsconfig);
-
-function getSiteData() {
-  const apiName = 'sgtestapi';
-  const path = '/site';
-  const myInit = { // OPTIONAL
-    headers: {}, // OPTIONAL
-  };
-
-  return API.get(apiName, path, myInit);
-}
-
-
-export async function getServerSideProps() {
-  const siteData = await getSiteData()
-  return { props: { siteData } }
-}
-
-import Navbar from "./components/Navbar"
-import TestStackTable from "./components/TestStackTable"
-import SiteCreateButton from "./components/SiteCreateButton"
+import Navbar from "../components/Navbar"
+import TestStackTable from "../components/TestStackTable"
+import SiteCreateButton from "../components/SiteCreateButton"
 
 export default function Home({siteData}) {
   return (
@@ -44,4 +25,17 @@ export default function Home({siteData}) {
       </main>
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  const { API } = withSSRContext(context)
+  let siteData;
+  try{
+    siteData = await API.get('sgtestapi', '/site');
+    console.log('getSiteData: worked');
+  } catch (err) {
+    console.log("getSiteData: ", err);
+  }
+
+  return { props: { siteData } }
 }
