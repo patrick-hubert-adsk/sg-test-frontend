@@ -38,7 +38,6 @@ export async function getServerSideProps(context) {
   let siteData;
   try{
     siteData = await API.get('sgtestapi', '/site');
-    console.log('getSiteData: worked');
   } catch (err) {
     console.log("getSiteData: ", err);
   }

@@ -14,14 +14,16 @@ export default function SiteCreateButton() {
       setOpen(true);
     };
 
-    // siteName: document.getElementById("site_name").value,
-    // branch: document.getElementById("branch").value
     const handleCreate = (thisForm) => {
       fetch('/api/createTestSite', {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
         body: JSON.stringify({
-          siteName: 'abc',
-          branch: 'dev'
+          siteName: document.getElementById("site_name").value,
+          branch: document.getElementById("branch").value
         })
       });
       setOpen(false);
@@ -33,9 +35,9 @@ export default function SiteCreateButton() {
 
     return (
       <div>
-        <Button variant="contained" onClick={handleClickOpen}>
-          Create Test Site
-        </Button>
+        <button onClick={handleClickOpen} style={{backgroundColor: 'white', border: 0, padding: 0}}>
+          <img src="/static/images/buttons/create2.png" alt="Create a New Test Site" width="200" height="55" />
+        </button>
         <Dialog open={open} onClose={handleCancel} aria-labelledby="form-dialog-title">
           <DialogTitle id="form-dialog-title">Create Test Site</DialogTitle>
           <DialogContent>
@@ -59,12 +61,12 @@ export default function SiteCreateButton() {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleCancel} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={handleCreate} color="primary">
-              Create
-            </Button>
+            <button onClick={handleCancel} style={{backgroundColor: 'white', border: 0, padding: 0}}>
+              <img src="/static/images/buttons/cancel.png" alt="Cancel" width="100" height="46" />
+            </button>
+            <button onClick={handleCreate} style={{backgroundColor: 'white', border: 0, padding: 0}}>
+              <img src="/static/images/buttons/create.png" alt="Create New Site" width="175" height="46" />
+            </button>
           </DialogActions>
         </Dialog>
       </div>
