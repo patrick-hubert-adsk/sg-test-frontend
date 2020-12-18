@@ -1,8 +1,9 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 
 export default function SiteUpdateButton() {
     return (
-    <Button variant="contained">Update</Button>
+      <a variant="contained">
+        <img src="/static/images/buttons/update.png" alt="Update Test Site" width="121" height="46" />
+      </a>
     );
   }

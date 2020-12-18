@@ -1,8 +1,9 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 
 export default function SiteDeleteButton() {
     return (
-    <Button variant="contained">Delete</Button>
+      <a variant="contained">
+        <img src="/static/images/buttons/delete2.png" alt="Delete Test Site" width="121" height="46" />
+      </a>
     );
   }

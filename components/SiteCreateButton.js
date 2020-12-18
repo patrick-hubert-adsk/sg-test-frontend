@@ -7,22 +7,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import Amplify, { API } from 'aws-amplify';
-import awsconfig from '../src/aws-exports';
-
-
-Amplify.configure(awsconfig);
-
-function createSite(site_name, branch) {
-  const apiName = 'sgtestapi';
-  const path = '/site';
-  const myInit = {
-    body: {app_tag: branch, site_name: site_name}
-  };
-
-  return API.post(apiName, path, myInit);
-}
-
 export default function SiteCreateButton() {
     const [open, setOpen] = React.useState(false);
 
@@ -30,8 +14,16 @@ export default function SiteCreateButton() {
       setOpen(true);
     };
 
+    // siteName: document.getElementById("site_name").value,
+    // branch: document.getElementById("branch").value
     const handleCreate = (thisForm) => {
-      createSite(document.getElementById("site_name").value, document.getElementById("branch").value)
+      fetch('/api/createTestSite', {
+        method: 'POST',
+        body: JSON.stringify({
+          siteName: 'abc',
+          branch: 'dev'
+        })
+      });
       setOpen(false);
     };
 
