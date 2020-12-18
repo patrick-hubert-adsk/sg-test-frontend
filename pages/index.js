@@ -5,24 +5,26 @@ import Amplify, { withSSRContext } from 'aws-amplify';
 import awsconfig from '../src/aws-exports';
 Amplify.configure(awsconfig);
 
+import GoogleFonts from "next-google-fonts";
+
 import Navbar from "../components/Navbar"
 import TestStackTable from "../components/TestStackTable"
 import SiteCreateButton from "../components/SiteCreateButton"
 
-export default function Home({siteData}) {
+export default function Home({siteData, branchData}) {
   return (
     <div>
+      <GoogleFonts href="https://fonts.googleapis.com/css?family=Montserrat:700%7COpen+Sans:300%7CRoboto:100,200,300,400,500,700,900%7CRoboto+Mono%7CMaterial+Icons&display=swap" />
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:700%7COpen+Sans:300%7CRoboto:100,200,300,400,500,700,900%7CRoboto+Mono%7CMaterial+Icons"/>
       </Head>
       <Navbar />
       <main className={styles.main}>
         <h1 className={styles.title}>
         SHOTGUN Cloud Test Stack
         </h1>
-        <SiteCreateButton />
+        <SiteCreateButton branchData={branchData}/>
         <div>
           <TestStackTable
             siteData={siteData}
@@ -35,12 +37,13 @@ export default function Home({siteData}) {
 
 export async function getServerSideProps(context) {
   const { API } = withSSRContext(context)
-  let siteData;
+  let siteData, branchData;
   try{
     siteData = await API.get('sgtestapi', '/site');
+    branchData = await API.get('sgtestapi', '/branch');
   } catch (err) {
     console.log("getSiteData: ", err);
   }
 
-  return { props: { siteData } }
+  return { props: { siteData, branchData } }
 }

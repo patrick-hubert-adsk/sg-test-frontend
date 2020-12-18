@@ -1,8 +1,8 @@
 import React from 'react';
 
 export default function SiteDeleteButton(siteData) {
-  const handleClick = (e) => {
-    fetch('/api/deleteTestSite', {
+  const handleClick = async (e) => {
+    await fetch('/api/deleteTestSite', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
