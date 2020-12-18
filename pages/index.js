@@ -11,7 +11,7 @@ import SiteCreateButton from "../components/SiteCreateButton"
 
 export default function Home({siteData}) {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
@@ -23,7 +23,11 @@ export default function Home({siteData}) {
         SHOTGUN Cloud Test Stack
         </h1>
         <p><SiteCreateButton /></p>
-        {TestStackTable(siteData)}
+        <div>
+          <TestStackTable
+            siteData={siteData}
+          />
+        </div>
       </main>
     </div>
   )

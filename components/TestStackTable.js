@@ -19,7 +19,17 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TestStackTable(rows) {
+function getCreator(tags) {
+  let creator = tags.find(obj => {
+    return obj.Key === "creator"
+  })
+  if (creator === undefined) {
+    return "Unknown";
+  }
+  return creator.Value;
+}
+
+export default function TestStackTable(props) {
   const classes = useStyles();
 
   return (
@@ -30,23 +40,26 @@ export default function TestStackTable(rows) {
           <TableCell></TableCell>
           <TableCell>Branch</TableCell>
             <TableCell align="left">Creator</TableCell>
+            <TableCell align="left">Status</TableCell>
             <TableCell align="left">Created</TableCell>
             <TableCell align="left">Actions</TableCell>
             <TableCell align="left"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {props.siteData.map((row) => (
+            getCreator(row.Tags) != "Unknown" &&
             <TableRow key={row.StackName}>
               <TableCell component="th" scope="row">
                 {SiteLaunchButton(row)}
               </TableCell>
               <TableCell align="left">{row.StackName}</TableCell>
-              <TableCell align="left">Unknown</TableCell>
+              <TableCell align="left">{getCreator(row.Tags)}</TableCell>
+              <TableCell align="left">{row.StackStatus}</TableCell>
               <TableCell align="left">{row.CreationTime.slice(0, 19)}</TableCell>
               <TableCell align="left">
-                <SiteUpdateButton />
-                <SiteDeleteButton />
+                <Button variant="contained">Update</Button>
+                <Button variant="contained">Delete</Button>
               </TableCell>
             </TableRow>
           ))}
