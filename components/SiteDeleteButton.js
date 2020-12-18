@@ -1,9 +1,22 @@
 import React from 'react';
 
-export default function SiteDeleteButton() {
-    return (
-      <a variant="contained">
+export default function SiteDeleteButton(siteData) {
+  const handleClick = (e) => {
+    fetch('/api/deleteTestSite', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        siteName: siteData.StackName.slice(11),
+      })
+    });
+  };
+
+  return (
+      <button onClick={handleClick} style={{backgroundColor: 'white', border: 0, padding: 0}}>
         <img src="/static/images/buttons/delete2.png" alt="Delete Test Site" width="121" height="46" />
-      </a>
+      </button>
     );
   }

@@ -53,13 +53,13 @@ export default function TestStackTable(props) {
               <TableCell component="th" scope="row">
                 {SiteLaunchButton(row)}
               </TableCell>
-              <TableCell align="left">{row.StackName}</TableCell>
+              <TableCell align="left">{row.StackName.slice(11)}</TableCell>
               <TableCell align="left">{getCreator(row.Tags)}</TableCell>
               <TableCell align="left">{row.StackStatus}</TableCell>
               <TableCell align="left">{row.CreationTime.slice(0, 19)}</TableCell>
               <TableCell align="left">
                 <SiteUpdateButton />
-                <SiteDeleteButton />
+                {SiteDeleteButton(row)}
               </TableCell>
             </TableRow>
           ))}
