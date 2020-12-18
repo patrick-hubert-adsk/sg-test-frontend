@@ -58,7 +58,7 @@ export default function TestStackTable(props) {
               <TableCell align="left">{row.StackStatus}</TableCell>
               <TableCell align="left">{row.CreationTime.slice(0, 19)}</TableCell>
               <TableCell align="left">
-                <SiteUpdateButton />
+                {SiteUpdateButton(row)}
                 {SiteDeleteButton(row)}
               </TableCell>
             </TableRow>

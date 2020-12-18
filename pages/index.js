@@ -22,7 +22,7 @@ export default function Home({siteData}) {
         <h1 className={styles.title}>
         SHOTGUN Cloud Test Stack
         </h1>
-        <p><SiteCreateButton /></p>
+        <SiteCreateButton />
         <div>
           <TestStackTable
             siteData={siteData}

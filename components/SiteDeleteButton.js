@@ -14,9 +14,11 @@ export default function SiteDeleteButton(siteData) {
     });
   };
 
-  return (
+  if (['CREATE_COMPLETE', 'UPDATE_COMPLETE'].includes(siteData.StackStatus)) {
+    return (
       <button onClick={handleClick} style={{backgroundColor: 'white', border: 0, padding: 0}}>
         <img src="/static/images/buttons/delete2.png" alt="Delete Test Site" width="121" height="46" />
       </button>
     );
   }
+}
