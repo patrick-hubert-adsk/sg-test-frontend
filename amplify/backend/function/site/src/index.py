@@ -23,7 +23,7 @@ def handler(event, context):
         elif event["httpMethod"] == "DELETE":
             body = delete_test_site(event)
         else:
-            status_code = 404
+            status_code = 200
             body = {}
 
         status_code = 200
@@ -58,6 +58,8 @@ def get_test_sites():
                 stack['CreationTime'] = str(stack['CreationTime'])
                 if stack.get('LastUpdatedTime'):
                     stack['LastUpdatedTime'] = str(stack['LastUpdatedTime'])
+                if stack.get('DeletionTime'):
+                    stack['DeletionTime'] = str(stack['DeletionTime'])
                 all_test_sites.append(stack)
         if not response.get('NextToken'):
             break

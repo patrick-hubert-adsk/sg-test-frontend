@@ -116,6 +116,10 @@ def create_stack(app_tag, site_name, site_id, stack_name, s3_backup_db_path, s3_
             'Key': 'adsk:moniker',
             'Value': 'SHOTGUN-C-UW2'
         },
+        {
+            'Key': 'creator',
+            'Value': 'patrick.hubert@autodesk.com'
+        }
     ],
     )
 
