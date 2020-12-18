@@ -1,17 +1,28 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-
-import Amplify, { withSSRContext } from 'aws-amplify';
-import awsconfig from '../src/aws-exports';
-Amplify.configure(awsconfig);
-
 import GoogleFonts from "next-google-fonts";
-
 import Navbar from "../components/Navbar"
 import TestStackTable from "../components/TestStackTable"
 import SiteCreateButton from "../components/SiteCreateButton"
+import { fetchSites } from './api/site';
+import { fetchBranches } from './api/branch';
+import useSWR from 'swr';
 
 export default function Home({siteData, branchData}) {
+  // console.log({siteData, branchData});
+  const { data: siteDataUpdated, mutate: siteMutate } = useSWR(`/api/site`, {
+    siteData,
+    refreshInterval: 1000 * 20,
+    revalidateOnMount: true,
+  });
+  const { data: branchDataUpdated, mutate: branchMutate } = useSWR(`/api/branch`, {
+    branchData,
+    refreshInterval: 1000 * 60 * 10,
+    revalidateOnFocus: false,
+    revalidateOnMount: true,
+  });
+
+  if (!branchDataUpdated || !siteDataUpdated) return "loading";
   return (
     <div>
       <GoogleFonts href="https://fonts.googleapis.com/css?family=Montserrat:700%7COpen+Sans:300%7CRoboto:100,200,300,400,500,700,900%7CRoboto+Mono%7CMaterial+Icons&display=swap" />
@@ -24,10 +35,11 @@ export default function Home({siteData, branchData}) {
         <h1 className={styles.title}>
         SHOTGUN Cloud Test Stack
         </h1>
-        <SiteCreateButton branchData={branchData}/>
+        <SiteCreateButton branchData={branchDataUpdated} mutate={siteMutate}/>
         <div>
           <TestStackTable
-            siteData={siteData}
+            siteData={siteDataUpdated}
+            mutate={siteMutate}
           />
         </div>
       </main>
@@ -35,15 +47,15 @@ export default function Home({siteData, branchData}) {
   )
 }
 
-export async function getServerSideProps(context) {
-  const { API } = withSSRContext(context)
-  let siteData, branchData;
-  try{
-    siteData = await API.get('sgtestapi', '/site');
-    branchData = await API.get('sgtestapi', '/branch');
-  } catch (err) {
-    console.log("getSiteData: ", err);
-  }
-
-  return { props: { siteData, branchData } }
-}
+export const getStaticProps = async () => {
+  const siteData = await fetchSites();
+  const branchData = await fetchBranches();
+  // console.log({siteData, branchData});
+  return {
+    props: {
+      siteData,
+      branchData
+    },
+    revalidate: 1,
+  };
+};

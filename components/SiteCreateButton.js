@@ -11,6 +11,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 const useStyles = makeStyles((theme) => ({
   formControl: {
     minWidth: 330,
@@ -20,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SiteCreateButton({branchData}) {
+export default function SiteCreateButton({branchData, mutate}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [siteName, setSiteName] = React.useState('');
@@ -30,8 +33,8 @@ export default function SiteCreateButton({branchData}) {
     setOpen(true);
   };
 
-  const handleCreate = (thisForm) => {
-    fetch('/api/createTestSite', {
+  const handleCreate = async (thisForm) => {
+    await fetch('/api/createTestSite', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -42,6 +45,8 @@ export default function SiteCreateButton({branchData}) {
         branch: branchName
       })
     });
+    await sleep(2000);
+    mutate();
     setOpen(false);
   };
 
@@ -51,7 +56,7 @@ export default function SiteCreateButton({branchData}) {
 
   return (
     <div>
-      <button onClick={handleClickOpen} style={{backgroundColor: 'white', border: 0, padding: 0}}>
+      <button onClick={handleClickOpen} style={{backgroundColor: 'white', border: 0, padding: 0, cursor: "pointer"}}>
         <img src="/static/images/buttons/create2.png" alt="Create a New Test Site" width="200" height="55" />
       </button>
       <Dialog open={open} onClose={handleCancel} aria-labelledby="form-dialog-title">

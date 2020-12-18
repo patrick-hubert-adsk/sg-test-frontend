@@ -29,7 +29,7 @@ function getCreator(tags) {
   return creator.Value;
 }
 
-export default function TestStackTable(props) {
+export default function TestStackTable({siteData, mutate}) {
   const classes = useStyles();
 
   return (
@@ -43,23 +43,22 @@ export default function TestStackTable(props) {
             <TableCell align="left">Status</TableCell>
             <TableCell align="left">Created</TableCell>
             <TableCell align="left">Actions</TableCell>
-            <TableCell align="left"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.siteData.map((row) => (
-            getCreator(row.Tags) != "Unknown" &&
-            <TableRow key={row.StackName}>
+          {siteData.map((siteDatum) => (
+            getCreator(siteDatum.Tags) != "Unknown" &&
+            <TableRow key={siteDatum.StackName}>
               <TableCell component="th" scope="row">
-                {SiteLaunchButton(row)}
+                <SiteLaunchButton siteData={siteDatum} />
               </TableCell>
-              <TableCell align="left">{row.StackName.slice(11)}</TableCell>
-              <TableCell align="left">{getCreator(row.Tags)}</TableCell>
-              <TableCell align="left">{row.StackStatus}</TableCell>
-              <TableCell align="left">{row.CreationTime.slice(0, 19)}</TableCell>
+              <TableCell align="left">{siteDatum.StackName.slice(11)}</TableCell>
+              <TableCell align="left">{getCreator(siteDatum.Tags)}</TableCell>
+              <TableCell align="left">{siteDatum.StackStatus}</TableCell>
+              <TableCell align="left">{siteDatum.CreationTime.slice(0, 19)}</TableCell>
               <TableCell align="left">
-                {SiteUpdateButton(row)}
-                {SiteDeleteButton(row)}
+                <SiteUpdateButton siteData={siteDatum} />
+                <SiteDeleteButton siteData={siteDatum} mutate={mutate} />
               </TableCell>
             </TableRow>
           ))}

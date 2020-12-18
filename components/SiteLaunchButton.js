@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function SiteLaunchButton(siteData) {
+export default function SiteLaunchButton({siteData}) {
   if (siteData.Outputs) {
     const siteUrl = `https://${siteData.Outputs[0].OutputValue}`;
 
@@ -10,10 +10,15 @@ export default function SiteLaunchButton(siteData) {
 
     if (['CREATE_COMPLETE', 'UPDATE_COMPLETE'].includes(siteData.StackStatus)) {
       return (
-        <button onClick={handleClick} style={{backgroundColor: 'white', border: 0, padding: 0}}>
+        <button onClick={handleClick} style={{backgroundColor: 'white', border: 0, padding: 0, cursor: "pointer"}}>
           <img src="/static/images/buttons/launch.png" alt="Launch Test Site" width="121" height="46" />
         </button>
       );
     }
   }
+  return (
+    <button style={{backgroundColor: 'white', border: 0, padding: 0, opacity: 0.25}}>
+      <img src="/static/images/buttons/launch.png" alt="Launch Test Site" width="121" height="46" />
+    </button>
+  );
 }
