@@ -23,7 +23,7 @@ def handler(event, context):
         elif event["httpMethod"] == "DELETE":
             body = delete_test_site(event)
         else:
-            status_code = 404
+            status_code = 200
             body = {}
 
         status_code = 200
