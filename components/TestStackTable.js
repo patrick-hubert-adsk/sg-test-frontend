@@ -42,7 +42,10 @@ export default function TestStackTable({siteData, mutate}) {
             <TableCell align="left">Creator</TableCell>
             <TableCell align="left">Status</TableCell>
             <TableCell align="left">Created</TableCell>
-            <TableCell align="left">Actions</TableCell>
+            <TableCell align="left" style={{display: 'flex', justifyContent: 'space-between', paddingRight: '20px'}}>
+              <span>Actions</span>
+              <button onClick={() => mutate()}>Refresh</button>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
