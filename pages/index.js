@@ -32,9 +32,6 @@ export default function Home({siteData, branchData}) {
       </Head>
       <Navbar />
       <main className={styles.main}>
-        <h1 className={styles.title}>
-        SHOTGUN Cloud Test Stack
-        </h1>
         <SiteCreateButton branchData={branchDataUpdated} mutate={siteMutate}/>
         <div>
           <TestStackTable

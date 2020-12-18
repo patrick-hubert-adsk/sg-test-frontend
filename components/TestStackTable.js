@@ -7,11 +7,11 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
 
 import SiteLaunchButton from './SiteLaunchButton';
 import SiteUpdateButton from './SiteUpdateButton';
 import SiteDeleteButton from './SiteDeleteButton';
+import RefreshButton from './RefreshButton';
 
 const useStyles = makeStyles({
   table: {
@@ -40,11 +40,10 @@ export default function TestStackTable({siteData, mutate}) {
           <TableCell></TableCell>
           <TableCell>Branch</TableCell>
             <TableCell align="left">Creator</TableCell>
-            <TableCell align="left">Status</TableCell>
             <TableCell align="left">Created</TableCell>
             <TableCell align="left" style={{display: 'flex', justifyContent: 'space-between', paddingRight: '20px'}}>
               <span>Actions</span>
-              <button onClick={() => mutate()}>Refresh</button>
+              <RefreshButton mutate={mutate} />
             </TableCell>
           </TableRow>
         </TableHead>
@@ -57,7 +56,6 @@ export default function TestStackTable({siteData, mutate}) {
               </TableCell>
               <TableCell align="left">{siteDatum.StackName.slice(11)}</TableCell>
               <TableCell align="left">{getCreator(siteDatum.Tags)}</TableCell>
-              <TableCell align="left">{siteDatum.StackStatus}</TableCell>
               <TableCell align="left">{siteDatum.CreationTime.slice(0, 19)}</TableCell>
               <TableCell align="left">
                 <SiteUpdateButton siteData={siteDatum} />

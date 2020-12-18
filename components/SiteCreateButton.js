@@ -57,7 +57,7 @@ export default function SiteCreateButton({branchData, mutate}) {
   return (
     <div>
       <button onClick={handleClickOpen} style={{backgroundColor: 'white', border: 0, padding: 0, cursor: "pointer"}}>
-        <img src="/static/images/buttons/create2.png" alt="Create a New Test Site" width="200" height="55" />
+        <img src="/static/images/buttons/create2.png" alt="Create a New Test Site" width="197" height="48" />
       </button>
       <Dialog open={open} onClose={handleCancel} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Create Test Site</DialogTitle>
@@ -88,10 +88,10 @@ export default function SiteCreateButton({branchData, mutate}) {
         </DialogContent>
         <DialogActions>
           <button onClick={handleCancel} style={{backgroundColor: 'white', border: 0, padding: 0}}>
-            <img src="/static/images/buttons/cancel.png" alt="Cancel" width="100" height="46" />
+            <img src="/static/images/buttons/cancel.png" alt="Cancel" width="84" height="34" />
           </button>
           <button onClick={handleCreate} style={{backgroundColor: 'white', border: 0, padding: 0}}>
-            <img src="/static/images/buttons/create.png" alt="Create New Site" width="175" height="46" />
+            <img src="/static/images/buttons/create.png" alt="Create New Site" width="159" height="35" />
           </button>
         </DialogActions>
       </Dialog>
